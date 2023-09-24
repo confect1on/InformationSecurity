@@ -6,7 +6,7 @@ using System.Text.Unicode;
 using InformationSecurity;
 
 Console.OutputEncoding = Encoding.UTF8;
-Playfair();
+TwoSquare();
 
 return;
 
@@ -48,14 +48,14 @@ static void Vigenere()
     Debug.Assert(encoded == textToDecode);
 }
 
+static string Separate(string source)
+{
+    return string.Join(" ", source.Chunk(2)
+        .Select<char[], string>(x => string.Join("", x)));
+}
+
 static void Playfair()
 {
-    string Separate(string source)
-    {
-        return string.Join(" ", source.Chunk(2)
-            .Select<char[], string>(x => string.Join("", x)));
-    }
-    
     var playfair = new PlayfairCipher();
     const string textToDecode = "ТРЕ=%ЖН8?Н7:КЦТ._ЗН?Г9Ы5=[8НВ1СВ=*С;";
     var decoded = playfair.Decode(textToDecode);
@@ -65,4 +65,17 @@ static void Playfair()
     Console.WriteLine($"Encoded: {Separate(encoded)}");
     Console.WriteLine($"Decoded without spaces: {decoded}");
     Debug.Assert(encoded == textToDecode);
+}
+
+static void TwoSquare()
+{
+    const string toDecode = "ХН[ШГ!ИЁЮИ№-Д8ЯЪДШЦ[}ЕЗП}-ЭЕ№ФЦ87М№ЗЭ%Я№+8№-Ч*СФ";
+    var twoSquare = new TwoSquareCipher();
+    Console.WriteLine(Separate(toDecode));
+    var decoded = twoSquare.Decode(toDecode);
+    Console.WriteLine(Separate(decoded));
+    var encoded = twoSquare.Encode(decoded);
+    Console.WriteLine(Separate(encoded));
+    Debug.Assert(encoded == toDecode);
+    
 }
