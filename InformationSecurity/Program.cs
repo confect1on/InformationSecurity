@@ -63,5 +63,6 @@ static void Playfair()
     Console.WriteLine($"Encoded: {Separate(textToDecode)}");
     Console.WriteLine($"Decoded: {Separate(decoded)}");
     Console.WriteLine($"Encoded: {Separate(encoded)}");
+    Console.WriteLine($"Decoded without spaces: {decoded}");
     Debug.Assert(encoded == textToDecode);
 }
