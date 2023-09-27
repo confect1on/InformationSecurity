@@ -2,18 +2,18 @@
 
 using System.Diagnostics;
 using System.Text;
-using System.Text.Unicode;
 using InformationSecurity;
+using InformationSecurity.Alphabets;
 
 Console.OutputEncoding = Encoding.UTF8;
-TwoSquare();
+Vigenere();
 
 return;
 
 static void Caesar()
 {
     // arrange
-    var caesar = new CaesarCipher(@"ABCDEFGHIJKLMNOPQRSTUVWXYZ[\]^_");
+    var caesar = new CaesarCipher(new EnglishAlphabet().Alphabet);
     const string textToEncode = "SKORO_PASXA_XRISTOS_VOSKRES_PEKI_KYLICHI_MOLIS";
     const string textToDecode = @"MTSNBTMCISV[HCSUMWXHSCV[XBSDFX^FTGBCXSD_CLCSU\GSUFTJC";
 
@@ -34,7 +34,7 @@ static void Caesar()
 static void Vigenere()
 {
     // arrange
-    var vigenere = new VigenereCipher();
+    var vigenere = new VigenereCipher(new RussianAlphabet());
     const string textToEncode = "УЖ_Я_МАХНУЛ_НА_ВСЕ_РУКОИ_ТЫ_КАКОИ_ТО";
     const string textToDecode = "ЯШЕГКАБОЫОАЬШЧУЭСОБЪР_ФАЭРЗЬЯФЭЦКНЧЕБМ"; 
     const string key = "СИЛАКРИПТО";
@@ -78,4 +78,29 @@ static void TwoSquare()
     Console.WriteLine(Separate(encoded));
     Debug.Assert(encoded == toDecode);
     
+}
+
+static void Gronsfeld()
+{
+    var algorithm = new GronsfeldCipher(new EnglishAlphabet());
+    const string source = @"AEBENZUVRTMXSVU\LPTQRAKLNYZYVWX^XQX[UMZU";
+    var key = new[] { 13, 21, 11, 17, 9 };
+    var decoded = algorithm.Decode(source, key);
+    Console.WriteLine(decoded);
+    var encoded = algorithm.Encode(decoded, key);
+    Debug.Assert(encoded == source);
+}
+
+static void Loopback()
+{
+    var gronsfeld = new GronsfeldCipher(new EnglishAlphabet());
+    var loopback = new LoopbackCipher(gronsfeld);
+    var keys = new[]
+    {
+        new[] {15, 10, 24, 19, 9},
+        new[] {13, 9, 7, 21, 4, 17, 11},
+        new[] {22, 12, 16, 25}
+    };
+    const string source = @"WEGFL\TKM\L[U]LGQGHEAOSO^VMGWXHT\\";
+    Console.WriteLine(loopback.Decode(source, keys));
 }
