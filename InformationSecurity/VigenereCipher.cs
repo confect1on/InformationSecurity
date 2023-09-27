@@ -1,19 +1,16 @@
-using System.Collections.Immutable;
 using System.Diagnostics;
 using System.Text;
+using InformationSecurity.Alphabets;
 
 namespace InformationSecurity;
 
 public class VigenereCipher
 {
-    private const string Alphabet = "АБВГДЕЖЗИКЛМНОПРСТУФХЦЧШЩЬЪЫЭЮЯ_";
-    private readonly IImmutableDictionary<char, int> _characterToIndex;
-
-    public VigenereCipher()
+    private readonly BaseAlphabet _alphabet;
+    
+    public VigenereCipher(BaseAlphabet alphabet)
     {
-        _characterToIndex = Alphabet
-            .Select((c, i) => new { Character = c, Index = i })
-            .ToImmutableDictionary(arg => arg.Character, arg => arg.Index);
+        _alphabet = alphabet;
     }
     
     public string Encode(string source, string key)
@@ -33,12 +30,12 @@ public class VigenereCipher
 
     private char DecodeCharacterByTable(char cipherChar, char keyChar)
     {
-        return Alphabet[(_characterToIndex[cipherChar] - _characterToIndex[keyChar] + Alphabet.Length) % Alphabet.Length];
+        return _alphabet.Alphabet[(_alphabet.GetAlphabetIndex(cipherChar) - _alphabet.GetAlphabetIndex(keyChar) + _alphabet.Alphabet.Length) % _alphabet.Alphabet.Length];
     }
     
     private char EncodeCharacterByTable(char sourceChar, char keyChar)
     {
-        return Alphabet[(_characterToIndex[sourceChar] + _characterToIndex[keyChar]) % Alphabet.Length];;
+        return _alphabet.Alphabet[(_alphabet.GetAlphabetIndex(sourceChar) + _alphabet.GetAlphabetIndex(keyChar)) % _alphabet.Alphabet.Length];
     }
 
     private static string ExtendKey(int sourceLength, string key)
