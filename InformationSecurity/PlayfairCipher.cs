@@ -19,7 +19,7 @@ public class PlayfairCipher
         { '=', 'В', '_', 'Н', '?', 'Ц', '%'},
     };
 
-    private Dictionary<char, Tuple<int, int>> _charToIndexPair;
+    private readonly Dictionary<char, Tuple<int, int>> _charToIndexPair;
     public PlayfairCipher()
     {
         _charToIndexPair = new Dictionary<char, Tuple<int, int>>(playfairMatrix.Length);
