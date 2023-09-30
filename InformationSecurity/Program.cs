@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Text;
 using InformationSecurity;
 using InformationSecurity.Alphabets;
+using InformationSecurity.Ciphers;
 
 Console.OutputEncoding = Encoding.UTF8;
 Vigenere();

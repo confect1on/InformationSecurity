@@ -2,7 +2,7 @@ using System.Diagnostics;
 using System.Text;
 using InformationSecurity.Alphabets;
 
-namespace InformationSecurity;
+namespace InformationSecurity.Ciphers;
 
 public class GronsfeldCipher
 {

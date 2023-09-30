@@ -1,7 +1,7 @@
 using System.Diagnostics;
 using System.Text;
 
-namespace InformationSecurity;
+namespace InformationSecurity.Ciphers;
 
 public class TwoSquareCipher
 {

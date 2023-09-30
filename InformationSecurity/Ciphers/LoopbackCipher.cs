@@ -1,4 +1,4 @@
-namespace InformationSecurity;
+namespace InformationSecurity.Ciphers;
 
 public class LoopbackCipher
 {

@@ -1,6 +1,6 @@
 using System.Collections.Immutable;
 
-namespace InformationSecurity;
+namespace InformationSecurity.Ciphers;
 
 public class CaesarCipher 
 {
