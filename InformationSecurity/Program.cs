@@ -41,6 +41,34 @@ static void NumericTheory()
     Console.WriteLine(aRemainder);
     Console.WriteLine(bRemainder);
     Console.WriteLine(aRemainder == bRemainder);
+
+    var aComp = 25;
+    var bComp = -1;
+    var modComp = 13;
+    Console.WriteLine($"{aComp} = {bComp} (mod {modComp}) - {Algebra.IsTrueModulaComparison(aComp, bComp, modComp)}");
+
+    var nForSystem = 9;
+    Console.WriteLine($"Complete: {string.Join(',', Algebra.NonNegativeMinSystemOfResidues(nForSystem))} ");
+    Console.WriteLine($"Reduced: {string.Join(',', Algebra.ReducedSystemOfResidues(nForSystem))}");
+
+    var aForCalc = 90;
+    var degreeForCalc = 42;
+    var modulaForCalc = 41;
+    Console.WriteLine($"Calculation: {Algebra.OptimizedByDegreeModula(aForCalc, degreeForCalc, modulaForCalc)}");
+
+    var aForEq = 5;
+    var bForEq = 3;
+    var modForEq = 11;
+    Console.WriteLine($"{aForEq} * x = {bForEq} (mod {modForEq})");
+    Console.WriteLine($"x = {string.Join(',', Algebra.ModulaEquationLinear(aForEq, bForEq, modForEq))}");
+
+    var aForResudial = -4;
+    var modForResudial = 3;
+    
+    Console.WriteLine($"Absolute min residuals for {modForResudial}: {string.Join(',', Algebra.AbsoluteMinSystemOfResidues(modForResudial))}");
+    Console.WriteLine($"Min absolute residual for {aForResudial} mod {modForResudial} : {aForResudial % modForResudial}");
+    Console.WriteLine($"Min non-negative residuals for {modForResudial}: {string.Join(',', Algebra.NonNegativeMinSystemOfResidues(modForResudial))}");
+    Console.WriteLine($"Min non-negative residual for {aForResudial} mod {modForResudial} : {Algebra.Modula(aForResudial, modForResudial)}");
 }
 
 

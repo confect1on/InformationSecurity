@@ -1,3 +1,5 @@
+using System.Diagnostics;
+
 namespace InformationSecurity;
 
 public record CanonicalMultiplier(int Multiplier, int Degree)
@@ -26,7 +28,7 @@ public static class Algebra
             ++k;
             (a, b) = (b, a % b);
         }
-        Console.WriteLine($"Gcd iteration's count: {k}");
+        // Console.WriteLine($"Gcd iteration's count: {k}");
         return a;
     }
 
@@ -81,7 +83,7 @@ public static class Algebra
             a *= 2;
         }
 
-        Console.WriteLine($"Binary gcd iteration's count: {k}");
+        // Console.WriteLine($"Binary gcd iteration's count: {k}");
         return a;
     }
 
@@ -131,5 +133,68 @@ public static class Algebra
         if (n > 1)
             result -= result / n;
         return result;
+    }
+
+    /// <summary>
+    /// Minimal non-negative residues.
+    /// </summary>
+    public static int[] NonNegativeMinSystemOfResidues(int n) => Enumerable.Range(0, n).ToArray();
+
+    public static int[] AbsoluteMinSystemOfResidues(int n) =>
+        n % 2 == 0
+        ? Enumerable.Empty<int>().Append(-n / 2).Concat(Enumerable.Range(-(n / 2 - 1), n - 1)).ToArray()
+        : Enumerable.Range(-(n - 1) / 2, n).ToArray();
+
+    public static int[] ReducedSystemOfResidues(int n) =>
+        Enumerable.Range(0, n).Where(x => BinaryGcd(n, x) == 1).ToArray();
+    
+    public static bool IsTrueModulaComparison(int a, int b, int modula) => Modula(a, modula) == Modula(b, modula);
+
+    public static int Modula(int x, int modula) => (x % modula + modula) % modula;
+
+    public static int OptimizedByDegreeModula(int x, int degree, int modula)
+    {
+        if (BinaryGcd(x, modula) == 1)
+        {
+            var euler = EulerFunc(modula);
+            degree %= euler;
+        }
+
+        long res = 1;
+        for (var i = 0; i < degree; i++)
+        {
+            res *= x;
+        }
+
+        return (int)(res % modula);
+    }
+
+    public static int[] ModulaEquationLinear(int a, int b, int m)
+    {
+        a %= m;
+        b %= m;
+        var d = BinaryGcd(a, m);
+        if (b % d != 0)
+        {
+            return Array.Empty<int>();
+        }
+
+        a /= d;
+        b /= d;
+        m /= d;
+        var solutions = new int[d];
+
+        var c = OptimizedByDegreeModula(a, EulerFunc(m) - 1, m);
+
+        a = (a * c) % m;
+        Debug.Assert(a == 1);
+        b = (b * c) % m;
+
+        for (var i = 0; i < d; i++)
+        {
+            solutions[i] = b + m * i;
+        }
+
+        return solutions;
     }
 }
