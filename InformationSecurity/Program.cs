@@ -7,9 +7,53 @@ using InformationSecurity.Alphabets;
 using InformationSecurity.Ciphers;
 
 Console.OutputEncoding = Encoding.UTF8;
-Vigenere();
+NumericTheory();
 
 return;
+
+static void NumericTheory()
+{
+    const int aForGcd = 715;
+    const int bForGcd = 195;
+    var stopwatch = new Stopwatch();
+    stopwatch.Start();
+    Algebra.Gcd(aForGcd, bForGcd);
+    Console.WriteLine($"Elapsed: {stopwatch.ElapsedMilliseconds}");
+    var binaryStopWatch = new Stopwatch();
+    binaryStopWatch.Start();
+    var gcd = Algebra.BinaryGcd(aForGcd, bForGcd);
+    Console.WriteLine($"Elapsed: {binaryStopWatch.ElapsedMilliseconds}");
+    Console.WriteLine($"Great common divisor:{gcd}");
+    
+    const int x = 10800;
+    Console.WriteLine($"Euler function: {Algebra.EulerFunc(x)}");
+
+    const int aForLcm = 744;
+    const int bForLcm = 198;
+    
+    Console.WriteLine($"Large common multiple: {Algebra.Lcm(aForLcm, bForLcm)}");
+
+    const int aForCompare = 25;
+    const int bForCompare = -1;
+    const int modula = 13;
+    const int aRemainder = aForCompare % modula;
+    const int bRemainder = bForCompare % modula;
+    Console.WriteLine(aRemainder);
+    Console.WriteLine(bRemainder);
+    Console.WriteLine(aRemainder == bRemainder);
+}
+
+
+static void Canonical()
+{
+    var x = 17;
+    var a = Algebra.CanonicalRepresentation(x);
+    foreach (var (multiplier, degree) in a)
+    {
+        Console.WriteLine($"{multiplier} in {degree} degree");
+    }
+}
+
 
 static void Caesar()
 {
