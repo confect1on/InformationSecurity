@@ -91,11 +91,11 @@ static void Caesar()
     const string textToDecode = @"MTSNBTMCISV[HCSUMWXHSCV[XBSDFX^FTGBCXSD_CLCSU\GSUFTJC";
 
     // act
-    var firstEncoded = caesar.Encode(textToEncode, 19);
-    var firstDecoded = caesar.Decode(firstEncoded, 19);
+    var firstEncoded = caesar.Enciphering(textToEncode, 19);
+    var firstDecoded = caesar.Deciphering(firstEncoded, 19);
 
-    var secondDecoded = caesar.Decode(textToDecode, 19);
-    var secondEncoded = caesar.Encode(secondDecoded, 19);
+    var secondDecoded = caesar.Deciphering(textToDecode, 19);
+    var secondEncoded = caesar.Enciphering(secondDecoded, 19);
 
     // assert
     Console.WriteLine($"Encoded: {firstEncoded}");
@@ -113,8 +113,8 @@ static void Vigenere()
     const string key = "СИЛАКРИПТО";
 
     // act
-    var decoded = vigenere.Decode(textToDecode, key);
-    var encoded = vigenere.Encode(decoded, key);
+    var decoded = vigenere.Deciphering(textToDecode, key);
+    var encoded = vigenere.Enciphering(decoded, key);
     
     // assert
     Console.WriteLine(decoded);
@@ -131,8 +131,8 @@ static void Playfair()
 {
     var playfair = new PlayfairCipher();
     const string textToDecode = "ТРЕ=%ЖН8?Н7:КЦТ._ЗН?Г9Ы5=[8НВ1СВ=*С;";
-    var decoded = playfair.Decode(textToDecode);
-    var encoded = playfair.Encode(decoded);
+    var decoded = playfair.Deciphering(textToDecode);
+    var encoded = playfair.Enciphering(decoded);
     Console.WriteLine($"Encoded: {Separate(textToDecode)}");
     Console.WriteLine($"Decoded: {Separate(decoded)}");
     Console.WriteLine($"Encoded: {Separate(encoded)}");
@@ -145,9 +145,9 @@ static void TwoSquare()
     const string toDecode = "ХН[ШГ!ИЁЮИ№-Д8ЯЪДШЦ[}ЕЗП}-ЭЕ№ФЦ87М№ЗЭ%Я№+8№-Ч*СФ";
     var twoSquare = new TwoSquareCipher();
     Console.WriteLine(Separate(toDecode));
-    var decoded = twoSquare.Decode(toDecode);
+    var decoded = twoSquare.Deciphering(toDecode);
     Console.WriteLine(Separate(decoded));
-    var encoded = twoSquare.Encode(decoded);
+    var encoded = twoSquare.Enciphering(decoded);
     Console.WriteLine(Separate(encoded));
     Debug.Assert(encoded == toDecode);
     
@@ -158,9 +158,9 @@ static void Gronsfeld()
     var algorithm = new GronsfeldCipher(new EnglishAlphabet());
     const string source = @"AEBENZUVRTMXSVU\LPTQRAKLNYZYVWX^XQX[UMZU";
     var key = new[] { 13, 21, 11, 17, 9 };
-    var decoded = algorithm.Decode(source, key);
+    var decoded = algorithm.Deciphering(source, key);
     Console.WriteLine(decoded);
-    var encoded = algorithm.Encode(decoded, key);
+    var encoded = algorithm.Enciphering(decoded, key);
     Debug.Assert(encoded == source);
 }
 
@@ -175,5 +175,5 @@ static void Loopback()
         new[] {22, 12, 16, 25}
     };
     const string source = @"WEGFL\TKM\L[U]LGQGHEAOSO^VMGWXHT\\";
-    Console.WriteLine(loopback.Decode(source, keys));
+    Console.WriteLine(loopback.Deciphering(source, keys));
 }

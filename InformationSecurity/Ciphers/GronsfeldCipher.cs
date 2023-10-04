@@ -12,7 +12,7 @@ public class GronsfeldCipher
     {
         _alphabet = alphabet;
     }
-    public string Encode(string source, int[] key)
+    public string Enciphering(string source, int[] key)
     {
         var extendKey = ExtendKeyCyclically(key, source.Length);
         var stringBuilder = new StringBuilder(source.Length);
@@ -25,7 +25,7 @@ public class GronsfeldCipher
         return stringBuilder.ToString();
     }
 
-    public string Decode(string cipher, int[] key)
+    public string Deciphering(string cipher, int[] key)
     {
         var extendKey = ExtendKeyCyclically(key, cipher.Length);
         Debug.Assert(extendKey.Length == cipher.Length);

@@ -32,7 +32,7 @@ public class PlayfairCipher
         }
     }
     
-    public string Encode(string source)
+    public string Enciphering(string source)
     {
         var stringLength = playfairMatrix.GetLength(1);
         var columnLenght = playfairMatrix.GetLength(0);
@@ -72,7 +72,7 @@ public class PlayfairCipher
     }
 
     private const char SeparateSymbol = 'Ъ';
-    public string Decode(string cipher)
+    public string Deciphering(string cipher)
     {
         Debug.Assert(cipher.Length % 2 == 0);
         var stringLength = playfairMatrix.GetLength(1);

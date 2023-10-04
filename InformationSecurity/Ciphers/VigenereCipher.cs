@@ -13,7 +13,7 @@ public class VigenereCipher
         _alphabet = alphabet;
     }
     
-    public string Encode(string source, string key)
+    public string Enciphering(string source, string key)
     {
         var extendedKey = ExtendKey(source.Length, key);
         Debug.Assert(extendedKey.Length == source.Length);
@@ -21,7 +21,7 @@ public class VigenereCipher
             .Select((c, i) => EncodeCharacterByTable(c, extendedKey[i])));
     }
     
-    public string Decode(string source, string key)
+    public string Deciphering(string source, string key)
     {
         var extendedKey = ExtendKey(source.Length, key);
         return string.Join("", source

@@ -9,13 +9,13 @@ public class LoopbackCipher
         _gronsfeldCipher = gronsfeldCipher;
     }
 
-    public string Encode(string source, IEnumerable<int[]> keys)
+    public string Enciphering(string source, IEnumerable<int[]> keys)
     {
-        return keys.Aggregate(source, (current, key) => _gronsfeldCipher.Encode(current, key));
+        return keys.Aggregate(source, (current, key) => _gronsfeldCipher.Enciphering(current, key));
     }
 
-    public string Decode(string cipher, IEnumerable<int[]> keys)
+    public string Deciphering(string cipher, IEnumerable<int[]> keys)
     {
-        return keys.Aggregate(cipher, (current, key) => _gronsfeldCipher.Decode(current, key));
+        return keys.Aggregate(cipher, (current, key) => _gronsfeldCipher.Deciphering(current, key));
     }
 }

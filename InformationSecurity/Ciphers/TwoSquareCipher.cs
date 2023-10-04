@@ -44,7 +44,7 @@ public class TwoSquareCipher
         _charToIndexesSecondSquare = GenerateCharToIndexesMapping(_secondSquare);
     }
     
-    public string Encode(string source)
+    public string Enciphering(string source)
     {
         var builder = new StringBuilder();
         foreach (var (a, b) in SplitByBigrams(source))
@@ -73,7 +73,7 @@ public class TwoSquareCipher
         return builder.ToString();
     }
 
-    public string Decode(string cipher)
+    public string Deciphering(string cipher)
     {
         Debug.Assert(cipher.Length % 2 == 0);
         var builder = new StringBuilder();

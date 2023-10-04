@@ -14,13 +14,13 @@ public class CaesarCipher
             .Select((c, i) => new { Item = c, Index = i })
             .ToImmutableDictionary(arg => arg.Item, arg => arg.Index);
     }
-    public string Encode(string source, int offset)
+    public string Enciphering(string source, int offset)
     {
         return string.Join("", source
             .Select(character => _alphabet[(_characterToAlphabetIndex[character] + offset) % _alphabet.Length]));
     }
 
-    public string Decode(string source, int offset)
+    public string Deciphering(string source, int offset)
     {
         return string.Join("",
             source.Select(character =>
